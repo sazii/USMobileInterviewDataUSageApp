@@ -1,14 +1,17 @@
-US Mobile Interview/ Data Usage App
 
-**1. Introduction**
+$${\color{orange}US  \space Mobile  \space Interview/  \space Data  \space Usage  \space App}$$
+
+$${\color{orange}1. Introduction}$$
 
 This document outlines the architecture and functionality of the application developed as part of the interview process for US Mobile. It provides a detailed explanation of how each service within the app operates
 
-**2.Architecture Overview**
+$${\color{orange}2. Architecture \space Overview}$$
 
-**2.1 High Level Architecture:**
+$${\color{orange}2.1. High \space Level \space Architecture}$$
+
 ![AD_4nXcuLvQf_Ll6FXKbAyuOxC56FyndpQoWlHPo2Z67O5RPjBMZSDEx76-I2dXXeIs2NwOV-L-eWOjs--AJkAHhZXqdtMUWIiZ3CnBeveNeeV-lR23vJQqoL0lV](https://github.com/user-attachments/assets/23eaac21-9868-491f-b2d6-f4c08199cfa4)
-**2.2 Service Descriptions**
+
+$${\color{orange}2.2. Service \space Descriptions}$$
 
 **User Service:** This service handles the CRUD operations for user profiles, allowing for the creation and real-time updating of user information within the system's database.
 
@@ -16,14 +19,15 @@ This document outlines the architecture and functionality of the application dev
 
 **Data Usage Service:** This service is responsible for ingesting and processing daily usage data provided in CSV files. It efficiently stores data and manages the lifecycle of billing cycles for each user-MDN pair. The service automates the creation of new cycles and maintains a detailed history of data usage, ensuring accurate and up-to-date cycle information.
 
-**3. Getting Started**
+$${\color{orange}3. Getting \space Started}$$
 
-**3.1 Prerequisites:**
+$${\color{orange}3.1. Prerequisites:}$$
 Java 17
-Spring-boot 3.3.2 (web, mongo, kafka)
+Spring-boot 3.3.2 (web, mongo, kafka, kafka-streams)
 Maven
+Apache Kafka
 
-**3.2 Installation Guide:**
+$${\color{orange}3.2. Installation \space Guide:}$$
 
 1- Clone repository
 
@@ -33,18 +37,18 @@ git clone [repository URL]
 
 2- Build Modules in the following order:
 
-Model
-UserService
-MDN Service
+Model,
+UserService,
+MDN Service,
 DataUsageService
 
-**4. API Documentation**
+$${\color{orange}4. API \space Documentation}$$
 
-**4.1 EndPoints**
+$${\color{orange}4.1. EndPoints}$$
 
-**4.1.1 User Service EndPoints**
+$${\color{orange}4.1.1. User\space Service \space EndPoints}$$
 
-**4.1.1.1 createUser**
+$${\color{orange}4.1.1.1. createUser}$$
 
 **HTTPRequest Type:** POST
 
@@ -52,7 +56,7 @@ DataUsageService
 
 **Request Json Exaple:**
 
-<pre lang=lisp>
+```json
 {
     "userDto":{
         "firstName":"ali",
@@ -62,11 +66,12 @@ DataUsageService
 
     }
 }
-</pre>
+```
+
 
 Response Json Exaple:
 
-<pre lang=lisp>
+```json
 {
     "userDto": {
         "userId": "US-986a6eb4-1e62-4694-aad0-381d4bd0eb26",
@@ -77,9 +82,9 @@ Response Json Exaple:
     },
     "message": "user is successfully created"
 }
-</pre>
+```
 
-**4.1.1.2 updateUserProfile**
+$${\color{orange}4.1.1.2. updateUserProfile}$$
 
 **HTTPRequest Type:** PUT
 
@@ -87,18 +92,18 @@ Response Json Exaple:
 
 **Request Json Exaple:**
 
-<pre lang=lisp>
+```json
 {
     "userId": "US-b98c8d3a-f646-4325-b5b6-d27bc0917454",
     "userRequestDto": {
         "password": "azmanli"
     }
 }
-</pre>
+```
 
 **Response Json Example:**
 
-<pre lang=lisp>
+```json
 {
     "userDto": {
         "userId": "US-b98c8d3a-f646-4325-b5b6-d27bc0917454",
@@ -109,11 +114,11 @@ Response Json Exaple:
     },
     "message": "user is successfully updated"
 }
-</pre>
+```
 
-**4.1.2 MDN Service EndPoints**
+$${\color{orange}4.1.2. MDN  \space Service \space EndPoints}$$
 
-**4.1.2.1 addMDN**
+$${\color{orange}4.1.2.1.addMDN}$$
 
 **HTTPRequest Type:** POST
 
@@ -121,18 +126,18 @@ Response Json Exaple:
 
 **Request Json Exaple:**
 
-<pre lang=lisp>
+```json
 {
     "mdnUserInfoDTO": {
         "userId": "US-b98c8d3a-f646-4325-b5b6-d27bc0917454",
         "mdn": "3579"
     }
 }
-</pre>
+```
 
 **Response Json Example:**
 
-<pre lang=lisp>
+```json
 {
     "mdnUserInfoDTO": {
         "userId": "US-b98c8d3a-f646-4325-b5b6-d27bc0917454",
@@ -140,9 +145,9 @@ Response Json Exaple:
     },
     "message": "3579 is successfully added to user US-b98c8d3a-f646-4325-b5b6-d27bc0917454"
 }
-</pre>
+```
 
-**4.1.2.2 setCycleDay**
+$${\color{orange}4.1.2.2. setCycleDay}$$
 
 **HTTPRequest Type:** POST
 
@@ -150,7 +155,7 @@ Response Json Exaple:
 
 **Request Json Exaple:**
 
-<pre lang=lisp>
+```json
 {
     "mdnUserInfoDTO": {
          "userId": "US-b98c8d3a-f646-4325-b5b6-d27bc0917454",
@@ -158,11 +163,11 @@ Response Json Exaple:
     },
     "dayOfMonth": 22
 }
-</pre>
+```
 
 **Response Json Example: **
 
-<pre lang=lisp>
+```json
 {
     "mdnUserInfoDTO": {
         "userId": "US-b98c8d3a-f646-4325-b5b6-d27bc0917454",
@@ -170,11 +175,11 @@ Response Json Exaple:
     },
     "message": "cycle day is successfully set"
 }
-</pre>
+```
 
-**4.1.3 DataUsageService EndPoints**
+$${\color{orange}4.1.3. Data \space Usage \space Service \space EndPoints}$$
 
-**4.1.3.1 getCycleHistory**
+$${\color{orange}4.1.3.1. getCycleHistory}$$
 
 **HTTPRequest Type:** GET
 
@@ -182,16 +187,16 @@ Response Json Exaple:
 
 **Request Json Exaple:**
 
-<pre lang=lisp>
+```json
 {
     "userId":"US-b98c8d3a-f646-4325-b5b6-d27bc0917454",
     "mdn":"3579"
 }
-</pre>
+```
 
 **Response Json Example:**
 
-<pre lang=lisp>
+```json
 {
     "cycleInfoDTOList": [
         {
@@ -206,9 +211,11 @@ Response Json Exaple:
         }
     ]
 }
-</pre>
+```
 
-**4.1.3.2 getCurCycleDailyUsageOFMDN**
+
+$${\color{orange}4.1.3.2. getCurCycleDailyUsageOFMDN}$$
+
 
 **HTTPRequest Type:** GET
 
@@ -216,18 +223,18 @@ Response Json Exaple:
 
 **Request Json Exaple:**
 
-<pre lang=lisp>
+```json
 {
     "userId":"US-5430ede9-417d-492e-be13-29200a27b3e6",
     "mdn":"2347",
     "page": 2,
     "pageSize": "6"
 }
-</pre>
+```
 
 **Response Json Example:**
 
-<pre lang=lisp>
+```json
 {
     "dailyUsageDTOs": {
         "totalElements": 42,
@@ -287,9 +294,48 @@ Response Json Exaple:
     "mdn": "2347",
     "message": "dailyUsages are successfully retrieved"
 }
+```
+
+**$${\color{orange}5.Design \space Decisions \space And \space Some \space Important \space Data \space Flow \space Explanations}$$**
+
+**$${\color{orange}5.1.Cycle \space  Management:}$$**
+
+**Cycle Creation:** Whenever a cycle day is set for a user, a new cycle is automatically initiated. This setup ensures that each user's cycle timeline starts precisely on the designated day.
+
+**Cycle Update Process:** The system runs an automated cycle update routine daily at 00:30. This process scans for user-MDN pairs whose cycle end date is the current day. It then closes the current cycle and initiates the next billing cycle for these pairs, ensuring seamless transition and continuous cycle management.
+
+**$${\color{orange}5.2.Daily \space Data \space Usage \space Management:}$$**
+
+$${\color{orange}Data \space Ingestion \space via \space Kafka \space Streams:}$$ The DataUsageService is configured to continuously listen for Daily Usage Data through Kafka Streams. This ensures real-time data processing and minimizes latency in data handling.
+
+$${\color{orange}Data \space Format \space and \space Processing:}$$ Incoming Daily Usage Data is transmitted in CSV format via Kafka Streams. The service employs batch processing techniques with a pre-defined batch size to manage the data efficiently. This batch size is configurable and can be adjusted according to system requirements by modifying the BATCH_SIZE field in the DataUsageConstants file.
+
+$${\color{orange}CSV \space File \space Example:}$$ For a sample of the expected CSV file format and its contents, you can refer to the example provided at the following link:
+https://docs.google.com/spreadsheets/d/1YdwpgVL2lJnqIhC5TO9VNxyDss1CwZTU-7BD10t-dfU/edit?gid=0#gid=0
+
+This example will help clarify the data structure and formatting required for processing.
+
+$${\color{orange}Sending \space CSV \space Files \space via \space Kafka:}$$ To send a CSV file to the Daily Usage Data stream, use the following command in your terminal:
+<pre lang=lisp>
+/usr/local/bin/kafka-console-producer --broker-list localhost:9092 --topic Daily-Usage-Stream-Topic2 < file.csv
 </pre>
+        
+This command pushes the contents of file.csv to the Daily-Usage-Stream-Topic2 on Kafka, ensuring that the DataUsageService receives and processes the data.
 
+**$${\color{orange}6. Potential \space Next \space Features}$$**
 
+$${\color{orange}6.1.Transfer\space  MDN}$$
 
+$${\color{orange}Feature \space Overview:}$$ The system architecture currently supports the potential implementation of an MDN (Mobile Directory Number) transfer feature. This capability would allow the reallocation of an MDN from one user to another within the platform.
 
+**Implementation Guide:**
 
+$${\color{orange}Deactivate \space Existing \space MDN:}$$ To initiate the transfer, first set the active field to false in the MDN field within the UserInfo entity of the MDNService. This action marks the MDN as inactive for the current user, effectively freeing it up for reassignment.
+
+$${\color{orange}Assign \space to \space New \space User:}$$ Utilize the addMDN endpoint to assign the now inactive MDN to a new user. This endpoint will handle the addition of the MDN to the requested user’s profile and reactivate it under the new user’s account.
+
+$${\color{orange}Considerations:}$$ Implementing this feature should include robust validation to ensure that an MDN can only be transferred under specific conditions, such as user consent and verification of the MDN's status. Additionally, proper logging of all transfer activities will be crucial for audit and tracking purposes.
+
+$${\color{orange}7.Improvements}$$
+
+Api-GateWay Implemntation
