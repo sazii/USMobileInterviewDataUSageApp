@@ -112,13 +112,13 @@ public class CycleServiceImpl implements CycleService {
 
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         log.info("hello********** {}", LocalDateTime.now());
-        Long midnight=LocalDateTime.now().until(LocalDateTime.now().plusMinutes(1), ChronoUnit.MINUTES);
+        Long midnight=LocalDateTime.now().until(LocalDateTime.now().plusDays(1).withHour(0).withMinute(30), ChronoUnit.MINUTES);
         //scheduler.schedule(this::updateCycleInfo, computeNextDelay(15,56, 50),TimeUnit.SECONDS );
         scheduler.scheduleAtFixedRate(this::updateCycleInfo, midnight, TimeUnit.DAYS.toMinutes(1), TimeUnit.MINUTES);
 
     }
 
-    private static long computeNextDelay(int targetHour, int targetMin, int targetSec) {
+   /* private static long computeNextDelay(int targetHour, int targetMin, int targetSec) {
         ZonedDateTime zonedNow = istanbulDateTime();
         ZonedDateTime zonedNextTarget = zonedNow.withHour(targetHour).withMinute(targetMin).withSecond(targetSec).withNano(0);
 
@@ -128,7 +128,7 @@ public class CycleServiceImpl implements CycleService {
 
         Duration duration = Duration.between(zonedNow, zonedNextTarget);
         return duration.getSeconds();
-    }
+    }*/
     public static ZonedDateTime istanbulDateTime() {
         return ZonedDateTime.now(ZoneId.of("Europe/Istanbul"));
     }
