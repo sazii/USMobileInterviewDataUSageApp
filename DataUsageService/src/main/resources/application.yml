@@ -1,0 +1,30 @@
+server:
+  port: 8088
+
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://mugoksazi:Ank55ist@cluster0.qdyakll.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      database: DataUsageDB
+  kafka:
+    bootstrap-servers: localhost:9092
+    streams:
+      application-id: csv-data-usage-app2
+      properties:
+        commit.intervals.ms: 100
+        cache.max.bytes.buffering: 0
+        enable.idempotence: true
+
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: mdn-data
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.value.default.type: com.usmobile.shared.model.data.MDNCycleEventDTO
+        enable.idempotence: true
+
+
+
