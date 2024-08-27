@@ -9,7 +9,8 @@ $${\color{orange}2. Architecture \space Overview}$$
 
 $${\color{orange}2.1. High \space Level \space Architecture}$$
 
-![AD_4nXcuLvQf_Ll6FXKbAyuOxC56FyndpQoWlHPo2Z67O5RPjBMZSDEx76-I2dXXeIs2NwOV-L-eWOjs--AJkAHhZXqdtMUWIiZ3CnBeveNeeV-lR23vJQqoL0lV](https://github.com/user-attachments/assets/23eaac21-9868-491f-b2d6-f4c08199cfa4)
+![A59A4351-6E41-40F2-B9B6-9850EF1EA7BB](https://github.com/user-attachments/assets/f10102d6-961b-4ef3-8051-20adfefeb7ae)
+
 
 $${\color{orange}2.2. Service \space Descriptions}$$
 
